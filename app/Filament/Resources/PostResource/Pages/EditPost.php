@@ -8,4 +8,9 @@ use Filament\Resources\Pages\EditRecord;
 class EditPost extends EditRecord
 {
     protected static string $resource = PostResource::class;
+
+    public function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

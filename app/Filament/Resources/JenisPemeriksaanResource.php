@@ -133,4 +133,14 @@ class JenisPemeriksaanResource extends Resource
       'edit'   => Pages\EditJenisPemeriksaan::route('/{record}/edit'),
     ];
   }
+
+  public static function getModelLabel(): string
+  {
+    return 'Jenis Pemeriksaan';
+  }
+
+  public static function getPluralModelLabel(): string
+  {
+    return 'Jenis Pemeriksaan';
+  }
 }

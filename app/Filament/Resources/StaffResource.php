@@ -110,4 +110,14 @@ class StaffResource extends Resource
       'edit'   => Pages\EditStaff::route('/{record}/edit'),
     ];
   }
+
+  public static function getModelLabel(): string
+  {
+    return 'Staff';
+  }
+
+  public static function getPluralModelLabel(): string
+  {
+    return 'Staf & Pengajar';
+  }
 }

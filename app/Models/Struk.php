@@ -20,12 +20,16 @@ class Struk extends Model
     'pemeriksaans',
     'total_tarif',
     'status',
+    'catatan_koreksi',
+    'approved_at',
+    'approved_by',
     'tanggal_pemeriksaan',
     'submitted_at'
   ];
   protected $casts = [
     'pemeriksaans' => 'array',          // JSON <-> PHP array auto-cast
     'total_tarif' => 'decimal:2',
+    'approved_at' => 'datetime',
     'tanggal_pemeriksaan' => 'datetime',
     'submitted_at' => 'datetime',
   ];
@@ -51,6 +55,11 @@ class Struk extends Model
   public function pasien()
   {
     return $this->belongsTo(Pasien::class);
+  }
+
+  public function approvedBy()
+  {
+    return $this->belongsTo(User::class, 'approved_by');
   }
 
   public function hasilLab()

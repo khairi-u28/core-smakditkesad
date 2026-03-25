@@ -83,4 +83,14 @@ class LulusanResource extends Resource
       'edit'   => Pages\EditLulusan::route('/{record}/edit'),
     ];
   }
+
+  public static function getModelLabel(): string
+  {
+    return 'Lulusan';
+  }
+
+  public static function getPluralModelLabel(): string
+  {
+    return 'Profil Lulusan';
+  }
 }

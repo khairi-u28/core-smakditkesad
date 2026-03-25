@@ -8,4 +8,9 @@ use Filament\Resources\Pages\EditRecord;
 class EditStruk extends EditRecord
 {
     protected static string $resource = StrukResource::class;
+
+    public function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

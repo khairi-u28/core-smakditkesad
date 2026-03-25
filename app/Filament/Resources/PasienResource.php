@@ -97,6 +97,10 @@ class PasienResource extends Resource
           ->label('Tgl Registrasi')
           ->date('d M Y')
           ->sortable(),
+        TextColumn::make('created_at')
+          ->label('Waktu Pendaftaran')
+          ->dateTime('d M Y H:i:s')
+          ->sortable(),
       ])
       ->defaultSort('tanggal_registrasi', 'desc')
       ->filters([
@@ -115,5 +119,15 @@ class PasienResource extends Resource
       'create' => Pages\CreatePasien::route('/create'),
       'edit'   => Pages\EditPasien::route('/{record}/edit'),
     ];
+  }
+
+  public static function getModelLabel(): string
+  {
+    return 'Pasien';
+  }
+
+  public static function getPluralModelLabel(): string
+  {
+    return 'Data Pasien';
   }
 }

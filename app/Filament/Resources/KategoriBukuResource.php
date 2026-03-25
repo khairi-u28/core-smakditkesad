@@ -64,4 +64,14 @@ class KategoriBukuResource extends Resource
       'edit'   => Pages\EditKategoriBuku::route('/{record}/edit'),
     ];
   }
+
+  public static function getModelLabel(): string
+  {
+    return 'Kategori Buku';
+  }
+
+  public static function getPluralModelLabel(): string
+  {
+    return 'Kategori Buku';
+  }
 }

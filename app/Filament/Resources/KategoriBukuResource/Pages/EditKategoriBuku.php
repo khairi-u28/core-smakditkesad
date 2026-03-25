@@ -8,4 +8,9 @@ use Filament\Resources\Pages\EditRecord;
 class EditKategoriBuku extends EditRecord
 {
     protected static string $resource = KategoriBukuResource::class;
+
+    public function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

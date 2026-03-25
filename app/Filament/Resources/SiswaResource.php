@@ -132,4 +132,14 @@ class SiswaResource extends Resource
       'edit'   => Pages\EditSiswa::route('/{record}/edit'),
     ];
   }
+
+  public static function getModelLabel(): string
+  {
+    return 'Siswa';
+  }
+
+  public static function getPluralModelLabel(): string
+  {
+    return 'Data Siswa';
+  }
 }

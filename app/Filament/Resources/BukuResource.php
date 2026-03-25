@@ -127,4 +127,14 @@ class BukuResource extends Resource
       'edit'   => Pages\EditBuku::route('/{record}/edit'),
     ];
   }
+
+  public static function getModelLabel(): string
+  {
+    return 'Buku';
+  }
+
+  public static function getPluralModelLabel(): string
+  {
+    return 'Koleksi Buku';
+  }
 }

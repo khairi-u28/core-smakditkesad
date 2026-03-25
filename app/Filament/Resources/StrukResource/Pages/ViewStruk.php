@@ -9,3 +9,4 @@ class ViewStruk extends ViewRecord
 {
     protected static string $resource = StrukResource::class;
 }
+
