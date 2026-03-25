@@ -1,0 +1,96 @@
+/* // ============================================================
+// FILE: resources/css/filament/admin/theme.css
+// Mobile-first overrides for Filament
+// ============================================================ */
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+:root {
+    --sidebar-width: 16rem;
+}
+
+/* ── Mobile: full-width tables ─────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Stack table actions vertically */
+    .fi-ta-actions {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    /* Make form sections single column */
+    .fi-fo-component-ctn {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Sidebar: bottom drawer on mobile */
+    .fi-sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        max-height: 70vh;
+        border-radius: 1rem 1rem 0 0;
+        z-index: 50;
+        overflow-y: auto;
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Compact padding on mobile */
+    .fi-main-ctn {
+        padding: 0.75rem !important;
+    }
+
+    /* Larger tap targets */
+    .fi-btn {
+        min-height: 2.75rem;
+    }
+
+    /* Full-width inputs on mobile */
+    .fi-fo-text-input input,
+    .fi-fo-select select {
+        font-size: 16px;
+        /* prevents iOS zoom on input focus */
+    }
+}
+
+/* ── Bottom Navigation Bar on Mobile ───────────────────── */
+@media (max-width: 768px) {
+    .fi-topbar {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        border-top: 1px solid var(--gray-200);
+        border-radius: 0;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .fi-main {
+        padding-bottom: 4rem;
+        /* space for bottom bar */
+        padding-top: 0;
+    }
+}
+
+/* ── Card hover effects ─────────────────────────────────── */
+.fi-wi-stats-overview-stat {
+    transition: transform 0.15s ease;
+}
+
+.fi-wi-stats-overview-stat:hover {
+    transform: translateY(-2px);
+}
+
+/* ── Table improvements ─────────────────────────────────── */
+.fi-ta-table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+/* Badge improvements */
+.fi-badge {
+    font-weight: 600;
+}
