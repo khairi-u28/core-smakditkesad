@@ -24,8 +24,8 @@ class JenisPemeriksaanResource extends Resource
   protected static ?string $model = JenisPemeriksaan::class;
   protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-beaker';
   protected static ?string $navigationLabel = 'Jenis Pemeriksaan';
-  protected static string|\UnitEnum|null $navigationGroup = 'Kasir Lab';
-  protected static ?int $navigationSort = 1;
+  protected static string|\UnitEnum|null $navigationGroup = 'Lab Asnakes';
+  protected static ?int $navigationSort = 2;
 
   public static function form(Schema $schema): Schema
   {
@@ -40,16 +40,31 @@ class JenisPemeriksaanResource extends Resource
 
           Select::make('bidang_periksa')
             ->label('Bidang')
-            ->options([
-              'Hematologi'    => 'Hematologi',
-              'Kimia Klinik'  => 'Kimia Klinik',
-              'Urinalisis'    => 'Urinalisis',
-              'Imunoserologi' => 'Imunoserologi',
-              'Mikrobiologi'  => 'Mikrobiologi',
-              'Parasitologi'  => 'Parasitologi',
-            ])
+            ->options(fn() => \App\Models\JenisPemeriksaan::query()
+              ->distinct()
+              ->orderBy('bidang_periksa')
+              ->pluck('bidang_periksa', 'bidang_periksa')
+              ->merge([
+                'Hematologi'    => 'Hematologi',
+                'Kimia Klinik'  => 'Kimia Klinik',
+                'Urinalisis'    => 'Urinalisis',
+                'Imunoserologi' => 'Imunoserologi',
+                'Mikrobiologi'  => 'Mikrobiologi',
+                'Parasitologi'  => 'Parasitologi',
+              ])
+              ->unique()
+              ->sort()
+              ->all()
+            )
             ->required()
-            ->searchable(),
+            ->searchable()
+            ->createOptionForm([
+              TextInput::make('bidang_periksa')
+                ->label('Nama Bidang Baru')
+                ->required()
+                ->placeholder('Contoh: Toksikologi'),
+            ])
+            ->createOptionUsing(fn(array $data): string => $data['bidang_periksa']),
 
           TextInput::make('tipe_periksa')
             ->label('Tipe')

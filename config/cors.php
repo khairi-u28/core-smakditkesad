@@ -22,11 +22,15 @@ return [
     'http://localhost:3001',
     'https://smakditkesad.sch.id',
     'https://kasir.smakditkesad.sch.id',
-    // Add your cloudflare tunnel URL here during demo:
-    // 'https://abc-def-123.trycloudflare.com',
   ],
 
-  'allowed_origins_patterns' => [],
+  // Wildcard patterns for local tunneling tools (remove in strict prod)
+  'allowed_origins_patterns' => [
+    '#^https://[a-z0-9\-]+\.loca\.lt$#',          // localtunnel
+    '#^https://[a-z0-9\-]+\.ngrok-free\.app$#',   // ngrok free tier
+    '#^https://[a-z0-9\-]+\.ngrok\.io$#',         // ngrok paid
+    '#^https://[a-z0-9\-]+\.trycloudflare\.com$#', // Cloudflare Tunnel
+  ],
 
   'allowed_headers' => ['*'],
 

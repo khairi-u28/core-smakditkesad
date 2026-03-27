@@ -4,7 +4,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "tunnel:cf": "\"C:\\Program Files (x86)\\cloudflared\\cloudflared.exe\" tunnel --url http://localhost:80",
+        "go:tunnel": "npm run build && php artisan config:cache"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

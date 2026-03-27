@@ -52,7 +52,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Konten Landing Page')
                     ->icon('heroicon-o-globe-alt')
                     ->collapsed(false),
-                NavigationGroup::make('Kasir Lab')
+                NavigationGroup::make('Lab Asnakes')
                     ->icon('heroicon-o-beaker')
                     ->collapsed(false),
                 NavigationGroup::make('E-Library')
@@ -60,6 +60,9 @@ class AdminPanelProvider extends PanelProvider
                     ->collapsed(false),
                 NavigationGroup::make('Manajemen Pengguna')
                     ->icon('heroicon-o-users')
+                    ->collapsed(true),
+                NavigationGroup::make('Pengaturan')
+                    ->icon('heroicon-o-cog-6-tooth')
                     ->collapsed(true),
             ])
 
@@ -74,6 +77,7 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Resources\BukuResource::class,
                 \App\Filament\Resources\KategoriBukuResource::class,
                 \App\Filament\Resources\SiswaResource::class,
+                \App\Filament\Resources\UserResource::class,
             ])
 
             // ── Widgets ───────────────────────────────────

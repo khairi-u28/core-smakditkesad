@@ -12,7 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Trust all proxies so Laravel sees correct IP/scheme through tunnels (localtunnel, ngrok)
+        $middleware->trustProxies(at: '*');
+        // Ensure CORS headers are applied to every response
+        $middleware->use([
+            \Illuminate\Http\Middleware\HandleCors::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

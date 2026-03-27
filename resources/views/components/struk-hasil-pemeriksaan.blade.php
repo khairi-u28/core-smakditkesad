@@ -1,11 +1,25 @@
 @php
-$pemeriksaans = $record?->pemeriksaans ?? [];
+// ViewField from Filament passes array of items directly
+// For ViewField usage: $viewField contains the array of pemeriksaans
+// For Blade component usage: $record contains the full model
+
+if (isset($viewField)) {
+    // When used as ViewField in Filament forms
+    $pemeriksaans = $viewField;
+    $recordData = [];
+} else {
+    // When used as a legacy Blade component
+    $pemeriksaans = $record?->pemeriksaans ?? [];
+    $recordData = $record;
+}
 
 // Group by bidangPeriksa
-$grouped = collect($pemeriksaans)->groupBy('bidangPeriksa');
+$grouped = collect($pemeriksaans)->groupBy(function($item) {
+    return is_array($item) ? ($item['bidangPeriksa'] ?? 'Tidak Ditentukan') : ($item->bidangPeriksa ?? 'Tidak Ditentukan');
+});
 @endphp
 
-@if (empty($pemeriksaans))
+@if (empty($pemeriksaans) || $grouped->isEmpty())
   <div class="rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-center text-sm text-gray-600">
     Belum ada data pemeriksaan
   </div>
@@ -37,17 +51,33 @@ $grouped = collect($pemeriksaans)->groupBy('bidangPeriksa');
             @foreach ($items as $p)
               <tr class="transition-colors hover:bg-blue-50/50">
                 <td class="px-4 py-2 text-sm font-medium text-gray-800">
-                  {{ e($p['subPeriksa'] ?? '-') }}
+                  @if (is_array($p))
+                    {{ e($p['subPeriksa'] ?? '-') }}
+                  @else
+                    {{ e($p->subPeriksa ?? '-') }}
+                  @endif
                 </td>
                 <td class="px-4 py-2 text-sm text-gray-700">
-                  @if ($p['hasilPemeriksaan'] ?? null)
-                    <span class="font-mono">{{ e($p['hasilPemeriksaan']) }}</span>
+                  @if (is_array($p))
+                    @if ($p['hasilPemeriksaan'] ?? null)
+                      <span class="font-mono">{{ e($p['hasilPemeriksaan']) }}</span>
+                    @else
+                      <span class="text-gray-400">-</span>
+                    @endif
                   @else
-                    <span class="text-gray-400">-</span>
+                    @if ($p->hasilPemeriksaan ?? null)
+                      <span class="font-mono">{{ e($p->hasilPemeriksaan) }}</span>
+                    @else
+                      <span class="text-gray-400">-</span>
+                    @endif
                   @endif
                 </td>
                 <td class="px-4 py-2 text-right text-sm text-gray-700">
-                  Rp {{ number_format($p['tarif'] ?? 0, 0, ',', '.') }}
+                  @if (is_array($p))
+                    Rp {{ number_format($p['tarif'] ?? 0, 0, ',', '.') }}
+                  @else
+                    Rp {{ number_format($p->tarif ?? 0, 0, ',', '.') }}
+                  @endif
                 </td>
               </tr>
             @endforeach

@@ -19,8 +19,8 @@ class PasienResource extends Resource
   protected static ?string $model = Pasien::class;
   protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
   protected static ?string $navigationLabel = 'Data Pasien';
-  protected static string|\UnitEnum|null $navigationGroup = 'Kasir Lab';
-  protected static ?int $navigationSort = 2;
+  protected static string|\UnitEnum|null $navigationGroup = 'Lab Asnakes';
+  protected static ?int $navigationSort = 3;
 
   public static function form(Schema $schema): Schema
   {
